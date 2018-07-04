@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
-//@Transactional // <- app fails to start
+//@Transactional // <- ISSUE 3: app fails to start
 @Path("/animals")
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AnimalResource {
@@ -35,7 +35,7 @@ public class AnimalResource {
 
     @GET
     @Role("admin")
-//    @Transactional // <- app fails to start
+//    @Transactional // <- ISSUE 3: app fails to start
     public List<Animal> allAnimals() {
         return repository.findAll();
     }

@@ -19,7 +19,7 @@ public class App extends Jooby {
 
     {
         use(new Jackson()); // <- ok
-//        use(new Gzon()); // <- serialization fails, deserialization ok
+//        use(new Gzon()); // <- ISSUE 1: serialization fails, deserialization ok
 
         use("*", new RequestLogger().latency().extended());
 
