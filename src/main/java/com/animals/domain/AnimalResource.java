@@ -22,9 +22,10 @@ public class AnimalResource {
 
     @GET
     @Path("/:id")
-    @Role("admin")
+    @Role("animalPathVarExplicitResult")
     public Result animalPathVarExplicitResult(Long id) {
 
+        System.out.println("animalPathVarExplicitResult");
         final Result result = new Result();
 
         result.status(Status.OK);
@@ -34,34 +35,39 @@ public class AnimalResource {
     }
 
     @GET
-    @Role("admin")
+    @Role("allAnimals")
 //    @Transactional // <- ISSUE 3: app fails to start
     public List<Animal> allAnimals() {
+        System.out.println("allAnimals"); // <- ISSUE 4: method is matched well, but attribute "role" somehow is from...
         return repository.findAll();
     }
 
     @GET
-    @Role("admin")
+    @Role("animalRequestParam") // <- ISSUE 4: ...here
     public Optional<Animal> animalRequestParam(Long id) {
+        System.out.println("animalRequestParam");
         return repository.findOne(id);
     }
 
     @POST
-    @Role("admin")
+    @Role("save")
     public Animal save(@Body Animal animal) {
+        System.out.println("save");
         return repository.save(animal);
     }
 
     @PUT
-    @Role("admin")
+    @Role("update")
     public Animal update(@Body Animal animal) {
+        System.out.println("update");
         return repository.update(animal);
     }
 
     @DELETE
     @Path("/:id")
-    @Role("admin")
+    @Role("delete")
     public void delete(Long id) {
+        System.out.println("delete");
         repository.delete(id);
     }
 }
