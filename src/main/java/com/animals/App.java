@@ -2,7 +2,6 @@ package com.animals;
 
 import com.animals.config.database.EbeanProvider;
 import com.animals.config.security.Security;
-import com.animals.domain.Animal;
 import com.animals.domain.AnimalResource;
 import com.google.inject.Scopes;
 import io.ebean.EbeanServer;
