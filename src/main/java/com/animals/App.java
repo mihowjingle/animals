@@ -18,8 +18,8 @@ import org.jooby.json.Jackson;
 public class App extends Jooby {
 
     {
-        use(new Jackson()); // <- ok
-//        use(new Gzon()); // <- ISSUE 1: serialization fails, deserialization ok
+//        use(new Jackson()); // <- ok
+        use(new Gzon()); // <- ISSUE 1: serialization fails, deserialization ok... now both ok
 
         use("*", new RequestLogger().latency().extended());
 

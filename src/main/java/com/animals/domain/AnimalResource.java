@@ -51,9 +51,9 @@ public class AnimalResource {
 
     @POST
     @Role("save")
-    public Animal save(@Body Animal animal) {
+    public AnimalDto save(@Body Animal animal) {
         System.out.println("save");
-        return repository.save(animal);
+        return new AnimalDto(repository.save(animal));
     }
 
     @PUT
