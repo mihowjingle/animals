@@ -1,7 +1,6 @@
 package com.animals.domain;
 
 import com.animals.config.security.Role;
-import io.ebean.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.jooby.Result;
 import org.jooby.Status;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
-//@Transactional // <- ISSUE 3: app fails to start
 @Path("/animals")
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AnimalResource {
@@ -35,18 +33,17 @@ public class AnimalResource {
     }
 
     @GET
-    @Role("allAnimals")
-//    @Transactional // <- ISSUE 3: app fails to start
-    public List<Animal> allAnimals() {
-        System.out.println("allAnimals"); // <- ISSUE 4: method is matched well, but attribute "role" somehow is from...
-        return repository.findAll();
-    }
-
-    @GET
-    @Role("animalRequestParam") // <- ISSUE 4: ...here
+    @Role("animalRequestParam") // <- ISSUE 4.1: apparently query params, or lack thereof is not considered when resolving routes
     public Optional<Animal> animalRequestParam(Long id) {
         System.out.println("animalRequestParam");
         return repository.findOne(id);
+    }
+
+    @GET
+    @Role("allAnimals") // ISSUE 4.1: attribute value is still from here
+    public List<Animal> allAnimals() {
+        System.out.println("allAnimals"); // <- ISSUE 4.1: now this is unreachable (exception in above method - no param)
+        return repository.findAll();
     }
 
     @POST
