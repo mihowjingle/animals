@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Singleton
-//@Transactional // <- ISSUE 3: app fails to start
 @Path("/animals")
 @RequiredArgsConstructor(onConstructor = @__(@Inject))
 public class AnimalResource {
@@ -35,15 +34,14 @@ public class AnimalResource {
     }
 
     @GET
-    @Role("allAnimals")
-//    @Transactional // <- ISSUE 3: app fails to start
+    @Role // <- ISSUE 3: app fails to start
     public List<Animal> allAnimals() {
-        System.out.println("allAnimals"); // <- ISSUE 4: method is matched well, but attribute "role" somehow is from...
+        System.out.println("allAnimals");
         return repository.findAll();
     }
 
     @GET
-    @Role("animalRequestParam") // <- ISSUE 4: ...here
+    @Role("animalRequestParam")
     public Optional<Animal> animalRequestParam(Long id) {
         System.out.println("animalRequestParam");
         return repository.findOne(id);
