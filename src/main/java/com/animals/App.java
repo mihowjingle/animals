@@ -3,6 +3,7 @@ package com.animals;
 import com.animals.config.database.EbeanProvider;
 import com.animals.config.security.Security;
 import com.animals.domain.AnimalResource;
+import com.animals.domain.AnimalRoutes;
 import com.google.inject.Scopes;
 import io.ebean.EbeanServer;
 import org.jooby.Jooby;
@@ -25,7 +26,8 @@ public class App extends Jooby {
 
         use(new Security());
 
-        use(AnimalResource.class);
+//        use(AnimalResource.class);
+        use(new AnimalRoutes());
 
         use(new Jdbc());
 
