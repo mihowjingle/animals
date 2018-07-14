@@ -35,4 +35,8 @@ class AnimalRepository {
         ebean.update(animal);
         return animal;
     }
+
+    boolean exists(Long id) {
+        return id == null || ebean.find(Animal.class).where().eq("id", id).findCount() > 0;
+    }
 }
