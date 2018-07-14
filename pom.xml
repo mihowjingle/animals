@@ -82,14 +82,8 @@
 
         <dependency>
             <groupId>org.jooby</groupId>
-            <artifactId>jooby-gson</artifactId>
+            <artifactId>jooby-jackson</artifactId>
             <version>1.4.1</version>
-        </dependency>
-
-        <dependency>
-        <groupId>org.jooby</groupId>
-        <artifactId>jooby-jackson</artifactId>
-        <version>1.4.1</version>
         </dependency>
     </dependencies>
 
