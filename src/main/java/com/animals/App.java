@@ -1,12 +1,10 @@
 package com.animals;
 
-import com.animals.config.database.EbeanProvider;
 import com.animals.config.security.Security;
 import com.animals.domain.AnimalResource;
-import com.google.inject.Scopes;
-import io.ebean.EbeanServer;
 import org.jooby.Jooby;
 import org.jooby.RequestLogger;
+import org.jooby.ebean.Ebeanby;
 import org.jooby.flyway.Flywaydb;
 import org.jooby.jdbc.Jdbc;
 import org.jooby.json.Jackson;
@@ -29,7 +27,14 @@ public class App extends Jooby {
 
         use(new Flywaydb());
 
-        use((env, conf, binder) -> binder.bind(EbeanServer.class).toProvider(EbeanProvider.class).in(Scopes.SINGLETON));
+        use(new Ebeanby().doWith(conf -> {
+            conf.setAutoCommitMode(false);
+            conf.setName("ebean");
+            conf.setDefaultServer(true);
+            conf.setDisableClasspathSearch(false);
+            conf.addPackage("com.animals.domain");
+            conf.setExpressionNativeIlike(true);
+        }));
     }
 
     public static void main(final String[] args) {
