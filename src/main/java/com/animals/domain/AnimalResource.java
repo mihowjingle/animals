@@ -1,5 +1,6 @@
 package com.animals.domain;
 
+import com.animals.config.security.RequiredRole;
 import com.animals.config.security.Role;
 import lombok.RequiredArgsConstructor;
 import org.jooby.Result;
@@ -29,20 +30,20 @@ public class AnimalResource {
     }
 
     @POST
-    @Role("admin")
+    @RequiredRole(Role.ADMIN)
     public Animal save(@Body Animal animal) {
         return service.save(animal);
     }
 
     @PUT
-    @Role("admin")
+    @RequiredRole(Role.ADMIN)
     public Result update(@Body Animal animal) {
         return service.update(animal);
     }
 
     @DELETE
     @Path("/:id")
-    @Role("admin")
+    @RequiredRole(Role.ADMIN)
     public void delete(Long id) {
         service.delete(id);
     }
