@@ -11,6 +11,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Animal {
 
+    //this is a small change so that i have something to commit
+    //to test issue referencing
+
     @Id
     @Column(name = "id")
     @GeneratedValue
