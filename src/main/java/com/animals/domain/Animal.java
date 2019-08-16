@@ -11,8 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Animal {
 
-    //this is a small change so that i have something to commit
-    //to test issue referencing
+    //this will apparently fix issue 3
 
     @Id
     @Column(name = "id")
